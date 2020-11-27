@@ -56,20 +56,76 @@ const cardArray = [
   },
   {name: 'cartas8',
     img: 'images/cartas8.png'
+  },
+  {name: 'reverso',
+    img: 'images/reverso.png'
+  },
+  {name: 'Blanca', 
+    img: 'images/Blanca.png'
   }
   ]
+  
+  cardArray.sort(()=>0.5-Math.random())
 
 //Tablero
 const grid = document.querySelector('.grid')
+const resultDisplay = document.querySelector('#result')
+var cardsChosen=[]
+var cardsChosenId=[]
+var cardsWon=[]
 
 function createBoard(){
   for(let i=0; i< cardArray.length; i++){
     var card = document.createElement('img')
-    card.setAttribute('src', 'images/Blanca.png')
+    card.setAttribute('src', 'images/reverso.png')
     card.setAttribute('data-id', i)
-   // card.addEventListener('click', flipcard)
+   // card.addEventListener('click', flipCard)
     grid.appendChild(card)
   }
 }
 
+//Verificar match
+function checkForMatch(){
+  var cards=document.querySelectorAll('img')
+  const optionOneId=cardsChosenId[0]
+  const optionOTwoId=cardsChosenId[1]
+  if (cardsChosen[0]===cardsChosen[1]){
+    alert ('You foun a match')
+    cards[optionOneId].setAttribute('src', 'images/Blanca.png')
+    cards[optionTwoId].setAttribute('src', 'images/Blanca.png')
+    cardsWon.push(cardsChosen)
+  } else{
+    cards[optionOneId].setAttribute('src', 'images/Blanca.png')
+    cards[optionTwoId].setAttribute('src', 'images/Blanca.png')
+    alert ('Try again')
+  }
+  cardsChosen=[]
+  cardsChosenId=[]
+  resultDisplay.textContent = cardsWon.length
+  if (cardsWon.length===cardArray.length/2){
+    resultDisplay.textContent='Yeiiiii, you win'
+  }
+}
+
+
+//Voltear cartas
+function flipCard(){
+  var carId=this.getAttribute ('data-id')
+  cardsChosen.push(cardArray[cardId].name)
+  cardsChosenId.push(cardId)
+  this.setAttribute('src', cardArray[cardId].img)
+  if (cardsChosen.length===2){
+    setTimeout(checkForMatch, 500)
+  }
+}
+
+
 createBoard()
+
+
+
+
+
+
+
+})
