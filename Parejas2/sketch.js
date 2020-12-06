@@ -78,8 +78,8 @@ setTimeuot(()=>{
 
  function mousePressed (){
    if (visible){
-     cards.forEach((card)=>{
-       if(card.validate(mouseX, mouseY)){
+     cards.forEach((card)=>{//Recorrer las cartas
+       if(card.validate(mouseX, mouseY)){//Para dar el click
          if(refA==null){
            refA=card;
            card.setMostrar(true);//si A y B son iguales entonces quedan boca arriba
