@@ -5,12 +5,12 @@ class Card
         this.x = x;
         this.y = y;
         this.type = type;
-        this.img = images[type];
+        this.img = images[type];//Para poder poner todas las cartas de una sola vez
         this.completed = false;
         this.show = false;
     }
 
-    display()
+    display()//como la mona del vídeo
     {
         if(!this.completed){
             if(!this.show){               
@@ -31,7 +31,6 @@ class Card
         {
             return true;
         }
-
         return result;
     }
 

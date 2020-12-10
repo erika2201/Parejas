@@ -2,7 +2,7 @@ let timerTime = 0;
 let minutes = 0;
 let done = 0;
 let notMoreDone = true;
-let chambonada =0;
+let eso =0;
 let StopItPls = false;
 let images = [];
 let cards = [];
@@ -11,12 +11,12 @@ let cardCB = null;
 let activated = true;
 
 
-function preload()
+function preload()//el método para cargar imágenes
 {
 	let index = 1;
 	for(let i = 0; i < 8; i++)
 	{
-		images[i] = loadImage("images/S" + index + ".png");
+		images[i] = loadImage("images/C" + index + ".png");//cada imagen se llama con C, y el tipo N°
 		index++;
 	} 
 }
@@ -24,7 +24,7 @@ function preload()
 function reset()
 {
 
-	let type = [0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7];
+	let type = [0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7];//Dos veces porque se van a armar parejas
 	shuffle(type, true);
 	let locationX = 29;
 	let locationY = 100;
@@ -52,7 +52,7 @@ function reset()
 
 function setup() 
 {
-	createCanvas(300, 600);
+	createCanvas(300, 600);//dimensiones celular
 	reset();
 
 	setInterval(timeIt , 1000);
@@ -60,8 +60,8 @@ function setup()
 
 function draw()
 {
-	background(200);
-	fill(100,10,10);
+	background(0);
+	fill(0,100,150); //cartas boca abajo
 	cards.forEach((card) => 
 	{
 		card.display();
@@ -71,12 +71,17 @@ function draw()
 	noFill();
 	timer();
 	
-	//reset button
+	//botón de reiniciar
   noStroke ();
-	fill(160,50,100);
-	rect(155,30, 110,50, 10,10);
-	fill(230,200,200);
-	text('Reset',210,65);
+	fill(0,100,100);
+	rect(155,30, 120,50, 10,10);
+	fill(0);
+	textSize(30);
+	text('Reinicar',215,65);
+	//Parte de abajo
+	fill(0,100,100);
+	textSize(15);
+	text('!Empareja cuyos!',150,530)
 }
 
 function validateSelectedCardsType()
@@ -89,24 +94,22 @@ function validateSelectedCardsType()
 			completeSelectedCards();
 			if(notMoreDone===true){
 				done++;
-			
 				notMoreDone = false;
 				
 			}
-			chambonada++;
-			if(chambonada%25===0){
+			eso++;
+			if(eso%25===0){
 				notMoreDone = true;
 			}
 		}
 		else
 		{
 			resetSelectedCards();
-			
 		}
 	}
 }
 
-function completeSelectedCards()
+function completeSelectedCards()//para que me deje ver las cartas por un tiempo
 {
 	activated = false;
 	setTimeout(() => 
@@ -137,10 +140,9 @@ function resetSelectedCards()
 }
 
 function timer()
-{
-	fill(160,40,40);
-	stroke(160,40,40);
-	
+{//El tiempo/cronometro
+	fill(0,100,150);
+	stroke(0,100,150);
 	textSize(30);
 	textAlign(CENTER);
 	
@@ -175,10 +177,9 @@ function timeIt()
 }
 
 function mousePressed(){
-	if(mouseX > 155 && mouseX < 265 && mouseY > 30 && mouseY < 80){
+	if(mouseX > 155 && mouseX < 265 && mouseY > 30 && mouseY < 80){//Botón de reiniciar
 		reset();
 	}
-
 
 	if(activated)
 	{
